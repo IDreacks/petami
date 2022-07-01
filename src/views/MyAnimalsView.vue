@@ -1,17 +1,17 @@
 <template>
   <div>
-    <Search />
+    <MyAnimals />
   </div>
 </template>
 
 <script>
 import { useRouter } from "vue-router";
-import Search from "../components/Search.vue";
+import MyAnimals from "../components/MyAnimals.vue";
 
 const router = useRouter();
 export default {
   components: {
-    Search,
+    MyAnimals,
   },
 };
 </script>

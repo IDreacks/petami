@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AddAnnonce/>
+    <AddAnnonce />
   </div>
 </template>
 

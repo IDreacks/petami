@@ -34,7 +34,13 @@
 
 <script>
 import jwt_decode from "jwt-decode";
+import { mapWritableState } from "pinia";
+import { useUserStore } from "@/stores/main";
+
 export default {
+  computed: {
+    ...mapWritableState(useUserStore, { userStored: "user" }),
+  },
   data() {
     return {
       user: {
@@ -63,14 +69,13 @@ export default {
             console.log(e);
           });
 
-        if (response.token) {
-          sessionStorage.clear();
-          localStorage.clear();
-          sessionStorage.setItem("token", response.token);
-
-          let decoded = jwt_decode(response.token);
-          let role = decoded.roles;
-           this.$router.push('/home')
+        if (response?.token) {
+          let decoded = jwt_decode(response?.token);
+          console.log(decoded, "RRRRRR");
+          this.userStored = await decoded;
+          console.log(this.userStored, "RRRRRR");
+          this.userStored["token"] = response?.token;
+          this.$router.push("/home");
         }
       }
 

@@ -1,17 +1,17 @@
 <template>
   <div>
-    <Account/>
+    <MyAccount />
   </div>
 </template>
 
 <script>
 import { useRouter } from "vue-router";
-import Account from "../components/Account.vue";
+import MyAccount from "../components/MyAccount.vue";
 
 const router = useRouter();
 export default {
   components: {
-    Account,
+    MyAccount,
   },
 };
 </script>

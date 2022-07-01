@@ -1,17 +1,17 @@
 <template>
   <div>
-    <Home/>
+    <SearchBar />
   </div>
 </template>
 
 <script>
 import { useRouter } from "vue-router";
-import Home from "../components/Home.vue";
+import SearchBar from "../components/SearchBar.vue";
 
 const router = useRouter();
 export default {
   components: {
-    Home,
+    SearchBar,
   },
 };
 </script>

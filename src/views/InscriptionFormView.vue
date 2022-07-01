@@ -1,17 +1,17 @@
 <template>
   <div>
-    <AddAnimal />
+    <InscriptionForm />
   </div>
 </template>
 
 <script>
 import { useRouter } from "vue-router";
-import AddAnimal from "../components/AddAnimal.vue";
+import InscriptionForm from "../components/InscriptionForm.vue";
 
 const router = useRouter();
 export default {
   components: {
-    AddAnimal,
+    InscriptionForm,
   },
 };
 </script>

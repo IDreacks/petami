@@ -5,21 +5,26 @@ import { RouterLink, RouterView } from "vue-router";
   <header class="main-header">
     <nav class="navbar">
       <div class="navbar__logo">
-        <router-link to="/home">PETAMI</router-link>
+        <router-link to="/">PETAMI</router-link>
       </div>
       <ul>
         <li>
-          <router-link to="/search">
+          <router-link to="/">
+            Blog <span class="material-icons"> text_snippet </span>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/Search">
             Recherche <span class="material-icons"> search </span>
           </router-link>
         </li>
         <li>
-          <a href="animals">
+          <router-link to="/MyAnimals">
             Mes animaux<span class="material-icons"> pets </span>
-          </a>
+          </router-link>
         </li>
         <li>
-          <router-link to="/account">
+          <router-link to="/Account">
             Mon compte <span class="material-icons"> account_circle </span>
           </router-link>
         </li>
@@ -98,11 +103,8 @@ li a {
 span {
   margin-left: 5%;
 }
-.navbar__logo a  {
+.navbar__logo a {
   color: white;
-  font-size:2rem ;
-
+  font-size: 2rem;
 }
-
-
 </style>

@@ -56,7 +56,12 @@
 </template>
 
 <script>
+import { mapWritableState } from "pinia";
+import { useUserStore } from "@/stores/main";
 export default {
+  computed: {
+    ...mapWritableState(useUserStore, ["user"]),
+  },
   data() {
     return {
       annonce: {
@@ -77,16 +82,17 @@ export default {
       if (this.annonce.EndDate === "") {
         this.errors.push("Il faut ajouter une date départ!");
         return;
-        image.png;
       }
-      if (this.annonce.startDate === "") {
+      if (this.annonce.StartDate === "") {
         this.errors.push("Il faut ajouter une date de fin !");
         return;
       }
-      if (this.annonce.gender === "") {
+      if (this.annonce.Description === "") {
         this.errors.push("Il faut ajouter description !");
         return;
       }
+
+      this.annonce.user = `/api/users/${this.user.id}`;
 
       let response = await fetch("http://127.0.0.1:8000/api/annonces", {
         method: "POST",
@@ -94,7 +100,7 @@ export default {
         headers: {
           "Content-Type": "application/json",
 
-          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          Authorization: `Bearer ${this.user.token}`,
         },
       })
         .then((r) => {

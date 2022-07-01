@@ -1,21 +1,10 @@
 import { defineStore } from "pinia";
 
-export const useMainStore = defineStore({
-  id: "main",
+export const useUserStore = defineStore({
+  id: "userStore",
   state: () => ({
-    annonces: [
-      {
-        StartDate: "",
-      },
-    ],
-    users: [],
-    search_content: "",
-    error_msg: "",
-    response: "",
+    user: {},
+    annonces: [],
   }),
   persist: true,
-  getters: {
-    getAnnonces: (state) => state.annonces,
-    getUsers: (state) => state.users,
-  },
 });

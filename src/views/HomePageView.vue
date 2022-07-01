@@ -1,17 +1,17 @@
 <template>
   <div>
-    <Inscription/>
+    <HomePage />
   </div>
 </template>
 
 <script>
 import { useRouter } from "vue-router";
-import Inscription from "../components/Inscription.vue";
+import HomePage from "../components/HomePage.vue";
 
 const router = useRouter();
 export default {
   components: {
-    Inscription,
+    HomePage,
   },
 };
 </script>

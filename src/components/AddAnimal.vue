@@ -2,21 +2,7 @@
   <div id="ajout">
     <h1>Poster une annonce</h1>
     <form @submit.prevent="handleSubmit">
-      <!-- <select
-        name="AnimalType"
-        id="AnimalType"
-        v-if="AnimalTypes"
-        v-model="AnimalType"
-        required
-      >
-        <option
-          v-for="AnimalType in AnimalTypes"
-          :key="AnimalType['@id']"
-          :value="AnimalType['@id']"
-        >
-          {{ AnimalType.name }}
-        </option>
-      </select> -->
+      <label> Nom de l'animal :</label>
       <input
         type="text"
         name="Name"
@@ -25,6 +11,7 @@
         v-model="animal.Name"
         required
       />
+      <label> Age de l'animal :</label>
 
       <input
         type="number"
@@ -34,6 +21,7 @@
         v-model="animal.Age"
         required
       />
+      <label> Description de l'animal :</label>
 
       <input
         type="text"
@@ -52,34 +40,39 @@
 </template>
 
 <script>
+import { mapState } from "pinia";
+import { useUserStore } from "@/stores/main";
 export default {
+  computed: {
+    ...mapState(useUserStore, ["user"]),
+  },
   data() {
     return {
       animal: {
         Description: "",
         Name: "",
         Age: 0,
+        animal_type: "",
       },
       succes: "",
       error: "",
     };
   },
-  mounted() {
-    // this.fetchAnimalType();
-  },
+
   methods: {
     handleSubmit: async function () {
       if (this.animal.Name === "") {
         this.errors.push("Il faut un nom pour votre animal!");
         return;
-        image.png;
       }
       if (this.animal.Age === "") {
         this.errors.push("Il faut un age pour votre animal!");
         return;
       }
       if (this.animal.Description === "") {
-        this.errors.push("Il faut ajouter une courte description pour votre animal!");
+        this.errors.push(
+          "Il faut ajouter une courte description pour votre animal!"
+        );
         return;
       }
 
@@ -89,7 +82,7 @@ export default {
         headers: {
           "Content-Type": "application/json",
 
-          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          Authorization: `Bearer ${this.user.token}`,
         },
       })
         .then((r) => {
@@ -102,29 +95,13 @@ export default {
 
       this.succes = "Animal enregistré avec succès";
     },
-    // fetchAnimalType: async function () {
-    //   let reponse = await fetch(`http://127.0.0.1:8000/api/animals`, {
-    //     method: "GET",
-    //     headers: {
-    //       "Content-Type": "application/ld+json",
-    //     },
-    //   })
-    //     .then((r) => {
-    //       return r.json();
-    //     })
-    //     .catch((e) => {
-    //       console.log(e);
-    //     });
-    //   console.log(reponse);
-    //   if (reponse["hydra:member"]) this.Animaltype = reponse["hydra:member"];
-    // },
   },
 };
 </script>
 
 <style scoped>
 h1 {
-  color: white;
+  color: #be3858;
   margin-top: 5%;
   margin-bottom: 3%;
   display: flex;
@@ -135,43 +112,43 @@ form {
   flex-direction: column;
 }
 form input,
-textarea,
-h2 {
-  width: 60%;
+textarea {
+  width: 100%;
   margin: auto;
-  padding: 10px;
+  padding: 2%;
   border-radius: 5px;
   outline: none;
-  border-color: hsla(160, 100%, 37%, 1);
-  color: white;
-  background-color: #181818;
+  border-color: black;
+  color: black;
+  background-color: white;
   margin-top: 2%;
   display: flex;
   justify-content: center;
 }
 label {
-  margin: auto;
-  color: hsla(160, 100%, 37%, 1);
+  color: black;
+  font-weight: bold;
 }
 
 #add-button {
   margin-top: 2%;
-  color: hsla(160, 100%, 37%, 1);
+  color: white;
   padding: 10px;
   cursor: pointer;
-  background-color: #000000;
-  font-weight: bold;
+  background-color: #be3858;
+  font-weight: bolder;
 }
 #add-button:hover {
   background-color: #181818;
 }
 #ajout {
-  background-color: #181818;
+  background-color: #fffafa;
   width: 33%;
   margin: auto;
   padding: 5%;
   border-radius: 20px;
   margin-top: 5%;
+  border-color: #000000;
 }
 #succes {
   color: white;

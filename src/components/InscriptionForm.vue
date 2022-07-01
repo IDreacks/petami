@@ -1,12 +1,24 @@
 <template>
+  <title>Inscription</title>
+
   <div id="ajout">
-    <h1>Mon compte</h1>
+    <h1>Inscription</h1>
     <form @submit.prevent="handleSubmit">
+      <label>Email :</label>
+
+      <input
+        type="email"
+        name="email"
+        id="email"
+        placeholder="Dupont@gmail.com"
+        v-model="user.email"
+        required
+      />
       <label>Nom :</label>
 
       <input
         type="text"
-        name="lastname"
+        name="Lastname"
         id="lastname"
         placeholder="Dupont"
         v-model="user.lastname"
@@ -22,57 +34,18 @@
         v-model="user.firstname"
         required
       />
-      <label>Age :</label>
+      <label>Mot de passe :</label>
 
       <input
-        type="number"
-        name="age"
-        id="age"
-        placeholder="Dupont"
-        v-model="user.age"
+        type="password"
+        name="password"
+        id="password"
+        placeholder="*******"
+        v-model="user.password"
         required
       />
-      <label>Email :</label>
 
-      <input
-        type="email"
-        name="email"
-        id="email"
-        placeholder="Dupont@gmail.com"
-        v-model="user.email"
-        required
-      />
-      <label> Ville : </label>
-
-      <input
-        type="text"
-        name="city"
-        id="city"
-        placeholder="Votre ville"
-        v-model="user.city"
-        required
-      />
-            <label> N° de voie :</label>
-
-      <input
-        type="text"
-        name="street"
-        id="street"
-        placeholder="Julien"
-        v-model="user.street"
-        required
-      />
-      <label> Code Postal :</label>
-      <input
-        type="number"
-        name="postal_Code"
-        id="postal_Code"
-        placeholder="Julien"
-        v-model="user.postal_Code"
-        required
-      />
-   
-      <input type="submit" value="Sauvegarder" id="add-button" />
+      <input type="submit" value="s'inscrire" id="add-button" />
     </form>
     <span v-if="succes !== ''" id="succes">{{ succes }} </span>
     <span id="errors">{{ errors }} </span>
@@ -87,16 +60,13 @@ export default {
         firstname: "",
         lastname: "",
         email: "",
-        age: 0,
-        street: "",
-        postal_Code: 0,
-        city: "",
+        password: "",
       },
       succes: "",
       error: "",
     };
   },
-  mounted() {},
+
   methods: {
     handleSubmit: async function () {
       if (this.user.email === "") {
@@ -117,25 +87,7 @@ export default {
         );
         return;
       }
-      if (this.user.city === "") {
-        this.errors.push(
-          "Vous devez ajouter un mot de passe pour valider l'inscription"
-        );
-        return;
-      }
-      if (this.user.postal_Code === "") {
-        this.errors.push(
-          "Vous devez ajouter un mot de passe pour valider l'inscription"
-        );
-        return;
-      }
-      if (this.user.street === "") {
-        this.errors.push(
-          "Vous devez ajouter un mot de passe pour valider l'inscription"
-        );
-        return;
-      }
-      if (this.user.age === "") {
+      if (this.user.password === "") {
         this.errors.push(
           "Vous devez ajouter un mot de passe pour valider l'inscription"
         );
@@ -143,7 +95,7 @@ export default {
       }
 
       let response = await fetch("http://127.0.0.1:8000/api/users", {
-        method: "PUT",
+        method: "POST",
         body: JSON.stringify(this.user),
         headers: {
           "Content-Type": "application/json",
